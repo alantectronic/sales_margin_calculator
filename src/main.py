@@ -68,7 +68,6 @@ def main(page: ft.Page):
         border=ft.border.all(2, "#0079a7"),
         border_radius=5,
         padding=20,
-        margin=ft.margin.only(top=50),
         content=total
         
     )
@@ -112,8 +111,8 @@ def main(page: ft.Page):
                 ),
                 ft.Row(
                     [
-                        c, ft.Container(height=120, content=copy, alignment=ft.alignment.center, padding=10)
-                    ], expand=True, alignment=ft.MainAxisAlignment.CENTER, vertical_alignment=ft.CrossAxisAlignment.CENTER
+                        c, copy
+                    ], alignment=ft.MainAxisAlignment.CENTER, vertical_alignment=ft.CrossAxisAlignment.CENTER
                 ),
                 ft.Row(
                     [
