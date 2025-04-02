@@ -2,7 +2,7 @@ import flet as ft
 from components.AppBar import AppBar_
 from components.TextField import TextField_
 from components.Select import Select_
-from helpers import margin_calculator
+from helpers import margin_calculator, get_dolar_to_mxn
 
 
 def main(page: ft.Page):
@@ -12,15 +12,23 @@ def main(page: ft.Page):
     global price
     global currency
     global margin
+    global dollar
     margin = 0.15
+    dollar = get_dolar_to_mxn()
     price = 0
     currency = "usd"
+    
+    #text
     total = ft.Text(
             value="$0.00 MXN",
             weight=ft.FontWeight.BOLD,
             size=50, text_align=ft.TextAlign.CENTER, selectable=True
         )
-    
+    dollar_text = ft.Text(
+            value=f"1 USD = {dollar} MXN",
+            weight=ft.FontWeight.BOLD,
+            size=15, text_align=ft.TextAlign.END
+    )
     #onchange
     def price_change(e):
         global price
@@ -65,13 +73,17 @@ def main(page: ft.Page):
         
     )
 
+    #buttons
+    copy = ft.ElevatedButton("Copiar", on_click=lambda _: page.set_clipboard(total.value), width=100, height=40, bgcolor="#0079a7", 
+                                          color=ft.colors.WHITE, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=5)))
+
 
     
     page.theme_mode = ft.ThemeMode.LIGHT
     page.appbar = AppBar_().create()
-    page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD
-    )
+    # page.floating_action_button = ft.FloatingActionButton(
+    #     icon=ft.Icons.ADD
+    # )
     page.add(
         ft.Column(
             [
@@ -100,9 +112,14 @@ def main(page: ft.Page):
                 ),
                 ft.Row(
                     [
-                        c
-                    ], expand=True, alignment=ft.MainAxisAlignment.CENTER
+                        c, ft.Container(height=120, content=copy, alignment=ft.alignment.center, padding=10)
+                    ], expand=True, alignment=ft.MainAxisAlignment.CENTER, vertical_alignment=ft.CrossAxisAlignment.CENTER
                 ),
+                ft.Row(
+                    [
+                        dollar_text
+                    ], expand=True, alignment=ft.MainAxisAlignment.CENTER
+                )
             ]
         )
     )

@@ -39,7 +39,7 @@ def margin_calculator(margin, price, currency):
             c = 1
         price = float(price) * c
         margin = float(margin)
-        total = price/(1-margin/100)
+        total = price/(1-margin)
         return f'$ {round(total, 2)} MXN'
     except:
         total = 0
