@@ -69,9 +69,9 @@ def main(page: ft.Page):
     
     page.theme_mode = ft.ThemeMode.LIGHT
     page.appbar = AppBar_().create()
-    page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD
-    )
+    # page.floating_action_button = ft.FloatingActionButton(
+    #     icon=ft.Icons.ADD
+    # )
     page.add(
         ft.Column(
             [
